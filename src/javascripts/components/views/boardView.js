@@ -9,7 +9,7 @@ const boardsView = (user) => {
         $('#app').append(boardCard.boardMaker(item));
       });
     } else {
-      $('.alert').html('<h1 class="no-boards">No Boards</h1>');
+      $('.alert').html('<h1>No Boards</h1>');
     }
   });
 };
