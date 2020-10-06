@@ -42,7 +42,7 @@ const addBoard = (data) => axios.post(`${baseUrl}/boards.json`, data).then((resp
 const updateBoard = (uid, dataObject) => axios.patch(`${baseUrl}/boards/${uid}.json`, dataObject);
 
 const deleteBoard = (boardUid) => {
-  pins.getPinsOfBoards(boardUid)
+  pins.getPinBoards(boardUid)
     .then((response) => {
       response.forEach((item) => {
         pins.deletePin(item.uid);
@@ -50,7 +50,6 @@ const deleteBoard = (boardUid) => {
     })
     .then(() => {
       getSingleBoard(boardUid).then((response) => {
-        console.warn(response.uid);
         axios.delete(`${baseUrl}/boards/${response.uid}.json`);
       });
     });

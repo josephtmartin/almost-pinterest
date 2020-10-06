@@ -1,4 +1,5 @@
 import deleteBoard from '../../helpers/data/boardData';
+import displayPins from '../views/pinView';
 
 const boardMaker = (board) => {
   const domString = `<div class="card" id="${board.uid}">
@@ -17,6 +18,7 @@ const boardMaker = (board) => {
     $(`.card#${firebaseKey}`).remove();
     deleteBoard.deleteBoard(firebaseKey);
   });
+  displayPins.displayPins();
   return domString;
 };
 
