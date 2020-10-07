@@ -1,38 +1,40 @@
-import boardData from '../../helpers/data/boardData';
 import pinData from '../../helpers/data/pinData';
+import boardData from '../../helpers/data/boardData';
 
-const pinForm = (user) => {
-  $('#pin-form').html(`<h2>Add A Pin</h2>
+const updatePinForm = (pinObject, userId) => {
+  $('#update-pin-form').html(`<h2>Update A Pin</h2>
     <div id="success-message"></div>
     <form>
       <div id="error-message"></div>
       <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" placeholder="Example: Woodworking">
+        <input type="text" class="form-control" id="name" value="${pinObject.name}"placeholder="Example: Woodworking">
       </div>
       <div class="form-group">
         <label for="image">Image</label>
-        <input type="text" class="form-control" id="image" placeholder="Copy Image Address Here">
+        <input type="text" class="form-control" id="image" value="${pinObject.image}" placeholder="Copy Image Address Here">
       </div>
       <div class="form-group">
-      <label for="URL">URL Address</label>
-      <input type="text" class="form-control" id="website" placeholder="Url">
+      <label for="URL">Url Address</label>
+      <input type="text" class="form-control" id="website" value="${pinObject.url} placeholder="Url">
     </div>
       <div class="form-group">
-        <label for="user">User</label>
+        <label for="board">Board</label>
           <select class="form-control" id="board">
             <option value="">Select a Board</option>
           </select>
       </div>
-      <button id="add-board-btn" type="submit" class="btn btn-info"><i class="fas fa-plus-circle"></i> Add Pin</button>
+      <button id="update-pin-btn" type="submit" class="btn btn-info"><i class="fas fa-plus-circle"></i> Update Pin</button>
     </form>`);
 
-  boardData.getBoards(user).then((response) => {
+  boardData.getBoards(userId).then((response) => {
     response.forEach((item) => {
-      $('select').append(`<option value="${item.uid}">${item.name}</option>`);
+      $('select').append(`<option value="${item.uid}" ${
+        pinObject.boardUid === item.uid ? "selected ='selected'" : ''
+      }>${item.name}</option>`);
     });
   });
-  $('#add-board-btn').on('click', (e) => {
+  $('#update-pin-btn').on('click', (e) => {
     e.preventDefault();
 
     const data = {
@@ -49,10 +51,10 @@ const pinForm = (user) => {
     } else {
       $('#error-message').html('');
       pinData
-        .addPin(data)
+        .updatePin(pinObject.uid, data)
         .then(() => {
           $('#success-message').html(
-            '<div class="alert alert-success" role="alert">Your Board Was Added!</div>'
+            '<div class="alert alert-success" role="alert">Your Pin Was Updated!</div>'
           );
         })
         .catch((error) => console.warn(error));
@@ -67,4 +69,4 @@ const pinForm = (user) => {
   });
 };
 
-export default { pinForm };
+export default { updatePinForm };
