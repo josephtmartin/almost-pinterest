@@ -9,7 +9,7 @@ const boardForm = () => {
     <div id="error-message"></div>
     <div class="form-group">
       <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" placeholder="Example: Woodworking, Gaming, etc.">
+      <input type="text" class="form-control" id="name" placeholder="Example: Woodworking">
     </div>
     <div class="form-group">
       <label for="image">Image</label>
