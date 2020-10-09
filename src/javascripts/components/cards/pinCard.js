@@ -1,7 +1,7 @@
 import deletePin from '../../helpers/data/pinData';
 
 const pinMaker = (object) => {
-  const domString = `<div class="card" style="color: white" id="${object.uid}">
+  const domString = `<div class="card w-25 m-3" style="color: white" id="${object.uid}">
   <div class="img-container card-body" style="background-image: url(${object.image})">
   <div class="d-flex justify-content-center">
     <h3 class="card-title">${object.name}</h3>
